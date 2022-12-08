@@ -1,4 +1,4 @@
-🏗️ Exemplo de uma página com uma lista de tarefas utilizando JavaScript
+🏗️ Exemplo de uma página com uma lista de tarefas utilizando JavaScript.
 
 ➡️ [Acesse a página clicando aqui](https://gabrielcostarep.github.io/Lista-de-Tarefas/) ⬅️
 
