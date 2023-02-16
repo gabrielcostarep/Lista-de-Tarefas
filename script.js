@@ -1,51 +1,83 @@
-// Verificar se ja existe algo no localstorage, se nao determina um array vazio
-var tarefas = JSON.parse(localStorage.getItem("tarefas")) || [];
+let lista = document.querySelector('#ul');
+let tarefas = JSON.parse(localStorage.getItem('tarefas')) || [];
+const tarefa = document.querySelector('#tarefa');
+const horas = document.querySelector('#hours');
+const registrar = document.querySelector('#registrar');
+const apagarTudo = document.querySelector('#apagarTudo');
+const form = document.querySelector('form');
 
-// Toda vez que a pagina for recarregada, essa funcao sera chamada
-onload = function () {
-    if (tarefas == null) {
-        let lista = document.getElementById("ul");
-        lista.style.display = "none";
-    } else {
+document.addEventListener('click', function (e) {
+  let element = e.target;
+  if (element === registrar) {
+    addTask();
+  }
 
-        // Funcao para registrar as tarefas
-        function regist() {
-            let lista = document.getElementById("ul");
-            let conteudo = "";
+  if (element === apagarTudo) {
+    deleteAll();
+  }
 
-            tarefas.forEach((elemento_array) => {
-                conteudo += '<li style="list-style-type: none;">' + elemento_array + '</li>';
+  if (element.classList.contains('icon')) {
+    element.parentElement.remove();
+    saveTasks();
+  }
+});
 
-                // Uma outra maneira de ter o mesmo resultado:
-                // conteudo += `<li style="list-style-type: none;">${elemento_array}</li>`;
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+});
 
-            });
-            lista.innerHTML = conteudo;
-        }
-        regist();
-    }
-}
-
-// Funcao para adicionar uma nova tarefa
 function addTask() {
-    let inp = document.getElementById("tarefa").value;
-    let hr = document.getElementById("hours").value;
+  let inp = tarefa.value;
+  let hr = horas.value;
 
-    if (inp === "") {
-        alert("Insira uma tarefa")
-    } else if (hr === "") {
-        alert("Insira um horário")
-    } else {
-
-        // Salvando os dados coletados
-        tarefas.push(inp + " - " + hr);
-        localStorage.setItem("tarefas", JSON.stringify(tarefas));
-        location.reload();
-    }
+  if (!inp) {
+    alert('Insira uma tarefa');
+  } else if (!hr) {
+    alert('Insira um horário');
+  } else {
+    regist(`${inp} - ${hr}`);
+    saveTasks();
+  }
 }
 
-// Funcao para apagar todas as tarefas
-function apagarTudo() {
-    localStorage.clear();
-    location.reload();
+function regist(input) {
+  lista.innerHTML += `<li>${input}<img class="icon" src="./imagens/delete.svg"></li>`;
+  cleanInputs();
 }
+
+function deleteAll() {
+  localStorage.clear();
+  tarefas = [];
+  lista.innerHTML = '';
+}
+
+function cleanInputs() {
+  tarefa.value = '';
+  tarefa.focus();
+  horas.value = '';
+}
+
+function saveTasks() {
+  const liTarefas = document.querySelectorAll('li');
+  const listaDeTarefas = [];
+
+  for (let tarefa of liTarefas) {
+    let tarefaTexto = tarefa.innerText;
+    tarefaTexto = tarefaTexto.replace(
+      '<img class="icon" src="./imagens/delete.svg">',
+      ''
+    );
+    listaDeTarefas.push(tarefaTexto);
+  }
+
+  const tarefasJSON = JSON.stringify(listaDeTarefas);
+  localStorage.setItem('tarefas', tarefasJSON);
+}
+
+function loadTasks() {
+  for (let tarefa of tarefas) {
+    regist(tarefa);
+  }
+}
+
+loadTasks();

@@ -5,22 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LocalStorage</title>
+    <title>Lista de Tarefas</title>
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
     <div id="container">
-        <form action="">
+        <form>
             <input type="text" name="tarefa" id="tarefa" placeholder="Digite sua tarefa" required>
             <input type="time" name="hours" id="hours" required> <br>
-            <input onclick="addTask()" type="submit" value="Registrar">
-            <input onclick="apagarTudo()" type="button" value="Apagar todas as tarefas">
+            <input id="registrar" type="submit" value="Registrar">
+            <input id="apagarTudo" type="button" value="Apagar todas as tarefas">
         </form>
         <ul id="ul"></ul>
     </div>
     <div id="background">
-        <img src="./imagens/background.jpg" alt="Lista de Tarefas"> <br>
+        <img id="img" src="./imagens/background.jpg" alt="Lista de Tarefas"> <br>
         <a href="https://pt.vecteezy.com/vetor-gratis/projeto" target="_blank">Imagem por Vecteezy</a>
     </div>
     <script src="./script.js" defer></script>
