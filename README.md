@@ -3,7 +3,7 @@
 ➡️ [Acesse a página clicando aqui](https://gabrielcostarep.github.io/Lista-de-Tarefas/) ⬅️
 
  <div align="center" >
-  <img src="./Readme-cell-gif.gif" alt="demo-mobile" height="500em">
+  <img src="./Readme-gif.gif" alt="demo-mobile" height="500em">
 </div>
 
 ## 🚀 Tecnologias
